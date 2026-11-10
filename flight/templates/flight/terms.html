@@ -1,0 +1,24 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Điều khoản và Điều kiện | Flight</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/privacy-policy.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <h1>Điều khoản và Điều kiện</h1>
+            <p>Khi sử dụng dịch vụ của chúng tôi, bạn đồng ý với các điều khoản sau:</p>
+            <ul>
+                <li>Bạn phải cung cấp thông tin chính xác và đầy đủ khi đặt vé.</li>
+                <li>Mọi sai sót trong quá trình cung cấp thông tin, bạn sẽ hoàn toàn chịu trách nhiệm.</li>
+                <li>Tất cả thông tin bạn cung cấp cho trang web này phải chính xác, cập nhật và đầy đủ.</li>
+                <li>Nếu bạn có tài khoản trên trang web này, bạn nên bảo mật thông tin đăng nhập của mình. Bạn sẽ hoàn toàn chịu trách nhiệm cho mọi hoạt động của tài khoản.</li>
+                <li>Flight có quyền từ chối quyền truy cập vào trang web của mình đối với bất kỳ ai, vào bất kỳ lúc nào mà không cần thông báo và vì bất kỳ lý do gì.</li>
+            </ul>
+        </div>
+    </section>
+{% endblock%}

@@ -1,0 +1,26 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Giới thiệu | Flight</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/about.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <h1>About us</h1>
+            <p>Flight là nền tảng đặt vé máy bay trực tuyến hàng đầu tại Việt Nam, cung cấp dịch vụ đặt vé máy bay nội địa và quốc tế với giá tốt nhất.</p>
+            <p>Chúng tôi hiểu rằng việc đặt vé máy bay có thể gây nhiều khó khăn và mất thời gian. Vì vậy, chúng tôi đã tạo ra một nền tảng đơn giản, dễ sử dụng giúp bạn dễ dàng tìm kiếm và đặt vé máy bay phù hợp với nhu cầu của mình.</p>
+            <p>Với Flight, bạn có thể:</p>
+            <ul>
+                <li>Tìm kiếm và so sánh giá vé của nhiều hãng hàng không</li>
+                <li>Đặt vé nhanh chóng và an toàn</li>
+                <li>Nhận vé điện tử ngay lập tức</li>
+                <li>Được hỗ trợ 24/7 từ đội ngũ chăm sóc khách hàng</li>
+            </ul>
+            <p>Sứ mệnh của chúng tôi là mang đến trải nghiệm đặt vé máy bay tốt nhất cho khách hàng, với giá cả hợp lý và dịch vụ chất lượng.</p>
+        </div>
+    </section>
+{% endblock%}

@@ -1,0 +1,11 @@
+{% load static %}
+<article class="swiper-slide promotion-slide promotion-banner promotion-banner--{{ theme }}">
+    <img class="promotion-banner__image" src="{% static image %}" alt="Phong cảnh {{ destination }}" width="900" height="480">
+    <div class="promotion-banner__content">
+        <span class="promotion-banner__label"><i class="fas fa-plane" aria-hidden="true"></i> Q AIRWAYS · {{ destination }}</span>
+        <h3>{{ headline }}</h3>
+        <p>{{ description }}</p>
+        <a class="promotion-banner__cta" href="#tim-chuyen-bay">Tìm chuyến bay <span aria-hidden="true">↗</span></a>
+    </div>
+    <span class="promotion-banner__stamp" aria-hidden="true">LET’S<br>TAKE OFF</span>
+</article>

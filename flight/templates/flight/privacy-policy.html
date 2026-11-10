@@ -1,0 +1,40 @@
+{% extends 'flight/layout.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Chính sách bảo mật | Flight</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/privacy-policy.css' %}">
+{% endblock head %}
+
+{% block body %}
+    <section class="section">
+        <div class="container">
+            <h1>Chính sách bảo mật</h1>
+            <p>
+                Chính sách bảo mật này mô tả cách thức Flight thu thập, sử dụng và bảo vệ thông tin cá nhân của bạn khi sử dụng dịch vụ của chúng tôi.
+            </p>
+            <b>Thu thập thông tin</b>
+            <p>
+                Chúng tôi thu thập thông tin khi bạn đăng ký tài khoản, đặt vé hoặc điền các biểu mẫu trên trang web của chúng tôi. Thông tin thu thập bao gồm tên, email, số điện thoại và thông tin thanh toán của bạn.
+            </p>
+            <b>Sử dụng thông tin</b>
+            <p>
+                Thông tin của bạn được sử dụng để:
+                <ul>
+                    <li>Xử lý đơn đặt vé của bạn</li>
+                    <li>Cải thiện dịch vụ khách hàng</li>
+                    <li>Gửi email về các khuyến mãi và cập nhật (nếu bạn đồng ý)</li>
+                </ul>
+            </p>
+            <b>Bảo mật thông tin</b>
+            <p>
+                Chúng tôi thực hiện nhiều biện pháp bảo mật để đảm bảo an toàn cho thông tin cá nhân của bạn. Tất cả thông tin nhạy cảm được mã hóa và truyền tải an toàn.
+            </p>
+            <b>Chia sẻ thông tin</b>
+            <p>
+                Chúng tôi không bán, trao đổi hoặc chuyển giao thông tin cá nhân của bạn cho bên thứ ba. Điều này không bao gồm các bên thứ ba đáng tin cậy giúp chúng tôi vận hành trang web hoặc phục vụ bạn.
+            </p>
+        </div>
+    </section>
+{% endblock%}

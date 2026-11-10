@@ -1,0 +1,271 @@
+{% extends 'flight/layout3.html' %}
+
+{% load static %}
+
+{% block head %}
+    <title>Q Airways - Hơn cả một chuyến bay</title>
+    <script type="text/javascript" src="{% static 'js/index.js' %}"></script>
+    <style>
+        .navbar {
+            top: 0;
+            left: 0;
+            padding: .7rem 1.2rem;
+            background-color: transparent !important;
+            box-shadow: none;
+            transition: all 0.3s ease;
+            z-index: 1000;
+            position: absolute;
+            width: 100%;
+        }
+
+        .nav-link {
+            color: white !important;
+        }
+    </style>
+    
+{% endblock head %}
+
+{% block body %}
+    <section class="section first-section banner-background">
+        <button class="background-nav prev">
+            <i class="fas fa-chevron-left"></i>
+        </button>
+        <button class="background-nav next">
+            <i class="fas fa-chevron-right"></i>
+        </button>
+        <nav class="navbar navbar-expand-lg navbar-light transparent-navbar">
+            <a class="navbar-brand" href="{% url 'index' %}">
+                <img src="{% static 'img/icon_logo.png' %}" height="34" alt="">
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+          
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+              <ul class="navbar-nav mr-auto">
+                <li class="nav-item {% if not page %}active{% endif %}">
+                  <a class="nav-link" href="{% url 'index' %}">Trang chủ</a>
+                </li>
+                <li class="nav-item {% if page == 'bookings' %}active{% endif %}">
+                  <a class="nav-link" href="{% url 'bookings' %}">Vé của tôi</a>
+                </li>
+                <li class="nav-item {% if page == 'travelinfo' %}active{% endif %}">
+                    <a class="nav-link" href="{% url 'travelinfo' %}">Thông tin hành trình</a>
+                </li>
+              </ul>
+              <ul class="navbar-nav">
+                {% if not user.is_authenticated %}
+                  <li class="nav-item">
+                    <button class="btn btn-primary" style="border-radius: 25rem;" onclick="window.location.href = '/login';">
+                      <svg width="1.1em" height="1.1em" viewBox="0 1.5 16 16" class="bi bi-person-fill" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                      </svg>
+                      Đăng nhập
+                    </button>
+                  </li>
+                {% else %}
+                  <li class="nav-item dropdown my-account">
+                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                      Tài khoản của tôi
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                      <div class="dropdown-header" style="display: flex; padding: .5rem 1.2rem">
+                        <div>
+                            <svg width="1.5em" height="1.7em" viewBox="0 1 16 16" class="bi bi-person-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M13.468 12.37C12.758 11.226 11.195 10 8 10s-4.757 1.225-5.468 2.37A6.987 6.987 0 0 0 8 15a6.987 6.987 0 0 0 5.468-2.63z"/>
+                              <path fill-rule="evenodd" d="M8 9a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              <path fill-rule="evenodd" d="M8 1a7 7 0 1 0 0 14A7 7 0 0 0 8 1zM0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8z"/>
+                            </svg>
+                        </div>
+                        <div style="margin-left: 7%;">
+                            {{user.first_name}} {{user.last_name}}
+                        </div>
+                      </div>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="{% url 'logout' %}">
+                        <svg width="1.1em" height="1.1em" viewBox="0 1.5 16 16" class="bi bi-power" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                          <path fill-rule="evenodd" d="M5.578 4.437a5 5 0 1 0 4.922.044l.5-.866a6 6 0 1 1-5.908-.053l.486.875z"/>
+                          <path fill-rule="evenodd" d="M7.5 8V1h1v7h-1z"/>
+                        </svg>
+                        Đăng xuất
+                      </a>
+                    </div>
+                  </li>
+                {% endif %}
+              </ul>
+            </div>
+          </nav>
+      
+          <div class="swiper promotions">
+            <h2>Khuyến mãi &amp; cảm hứng bay</h2>
+            <div class="swiper-wrapper promotion-slider">
+                {% for promotion in promotions %}
+                    <div class="swiper-slide promotion-slide">
+                        <div class="promotion-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <h3>{{ promotion.title }}</h3>
+                        <p>{{ promotion.description }}</p>
+                        <p class="promotion-date">
+                            <i class="far fa-calendar-alt"></i>
+                            {{ promotion.start_date }} đến {{ promotion.end_date }}
+                        </p>
+                    </div>
+                {% endfor %}
+                {% include 'flight/promotion_banner.html' with image='img/maldives.jpg' destination='MALDIVES' headline='Chạm biển xanh, đón nắng vàng' description='Lên kế hoạch cho kỳ nghỉ giữa thiên đường nhiệt đới.' theme='ocean' %}
+                {% include 'flight/promotion_banner.html' with image='img/santorini.jpg' destination='SANTORINI' headline='Hẹn nhau nơi trời xanh' description='Khám phá những mái vòm xanh và hoàng hôn Địa Trung Hải.' theme='island' %}
+                {% include 'flight/promotion_banner.html' with image='img/paris.jpg' destination='PARIS' headline='Bay đến những điều lãng mạn' description='Một chuyến đi mới, ngàn khoảnh khắc đáng nhớ.' theme='sunset' %}
+            </div>
+            <!-- Pagination -->
+            <div class="swiper-pagination"></div>
+        </div>
+        
+        
+        
+
+        <div class="banner-div">
+            <div class="banner">
+            <h1 class="banner-text">Hơn cả một chuyến bay</h1>
+            </div>
+        </div>
+        <div class="search-flight" id="tim-chuyen-bay">
+            <div class="container">
+            <form class="search-flight-form" action="{% url 'flight' %}" onsubmit="return flight_search()">
+                <div class="align-items-center">
+                    <div class="search-flight-form-data">
+                        <div class="input-row" style="display: flex;">
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" class="form-check-input trip-type" id="one-way" name="TripType" value="1" checked>Một chiều
+                            </label>
+                        </div>
+                        <div class="form-check-inline">
+                            <label class="form-check-label">
+                            <input type="radio" class="form-check-input trip-type" id="round-trip" name="TripType" value="2" {% if trip_type == '2' %}checked{% endif %}>Khứ hồi
+                            </label>
+                        </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="flight-from" class="form_label">Từ: </label>
+                            <input type="text" name="Origin" placeholder="From" id="flight-from" class="form-control" onblur="hideplaces(this)" data-value="{{origin | lower}}" data-list="places_from" autocomplete="off" value="{{origin | upper}}">  <!--list="places_from"-->
+                            <div id="places_from" class="places_box">
+                                <div class="each_places_from_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
+                                <div class="each_places_from_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                <div class="each_places_from_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                <div class="each_places_from_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_from_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                <div class="each_places_from_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                <div class="each_places_from_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="flight_to" class="form_label">Đến: </label>
+                            <input type="text" name="Destination" placeholder="To" id="flight-to" class="form-control" onblur="hideplaces(this)" data-value="{{destination | lower}}" data-list="places_to" autocomplete="off" value="{{destination | upper}}">
+                            <div id="places_to" class="places_box">
+                                <div class="each_places_to_list places__list" data-value="del" onclick="selectplace(this)">Delhi (India)</div>
+                                <div class="each_places_to_list places__list" data-value="bom" onclick="selectplace(this)">Mumbai (India)</div>
+                                <div class="each_places_to_list places__list" data-value="bkk" onclick="selectplace(this)">Bangkok (Thailand)</div>
+                                <div class="each_places_to_list places__list" data-value="nrt" onclick="selectplace(this)">Tokyo (Japan)</div>
+                                <div class="each_places_to_list places__list" data-value="sin" onclick="selectplace(this)">Singapore (Singapore)</div>
+                                <div class="each_places_to_list places__list" data-value="tpe" onclick="selectplace(this)">Taipei (Taiwan)</div>
+                                <div class="each_places_to_list places__list" data-value="nyc" onclick="selectplace(this)">New York (USA)</div>
+                            </div>
+                        </div>
+                        <div class="input-row">
+                            <label for="depart_date" class="form_label">Ngày đi: </label>
+                            <input type="date" name="DepartDate" min="{{min_date}}" max="{{max_date}}" id="depart_date" placeholder="Date" class="form-control" value="{{depart_date}}">
+                        </div>
+                        <div class="input-row" >
+                            <label for="return_date" class="form_label">Ngày về: </label>
+                            <input type="date" name="ReturnDate" min="{{min_date}}" max="{{max_date}}" id="return_date" placeholder="Date" class="form-control" value="{{return_date}}" {% if trip_type != '2' %} disabled {% endif %}>
+                        </div>
+                        <div class="input-row">
+                            <label for="seat_class" class="form_label">Loại ghế: </label>
+                            <select name="SeatClass" id="SeatType" class="form-control selectpicker">
+                                <option value="economy" {% if seat == 'economy' %}selected{% endif %}>Economy</option>
+                                <option value="business" {% if seat == 'business' %}selected{% endif %}>Business</option>
+                            </select>
+                        </div>
+                        <div class="input-row">
+                            <button type="submit" class="btn">Tìm chuyến bay</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            </div>
+        </div>
+    </section>
+    <section class="section second-section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-lg-6">
+                    <div class="section_title text-center mb_70">
+                        <h2>Điểm đến phổ biến</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="row popular_destinations">
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_Italy'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/1.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Italy</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_Brazil'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/2.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Brazil</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_the_United_States'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/3.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">America</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_Nepal'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/4.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Nepal</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_the_Maldives'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/5.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Maldives</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-6">
+                    <div class="single_destination" onclick="window.location.href = 'https://en.wikipedia.org/wiki/Tourism_in_Indonesia'">
+                        <div class="thumb">
+                            <img src="{% static 'img/destination/6.jpg' %}" alt="">
+                        </div>
+                        <div class="content">
+                            <a href="#">Indonesia</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock%}

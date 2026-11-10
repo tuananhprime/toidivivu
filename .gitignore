@@ -1,0 +1,19 @@
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+
+# Local configuration and generated files
+.env
+.env.*
+!.env.example
+db.local.sqlite3
+*.log
+*.pot
+.DS_Store
+staticfiles/

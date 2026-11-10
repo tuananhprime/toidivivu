@@ -1,0 +1,302 @@
+.banner-background {
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    transition: background-image 0.5s ease-in-out;
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/maldives.jpg');
+}
+
+@keyframes changeBackground {
+
+    0%,
+    33% {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/maldives.jpg');
+    }
+
+    34%,
+    66% {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/santorini.jpg');
+    }
+
+    67%,
+    100% {
+        background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)), url('../img/paris.jpg');
+    }
+}
+
+/* Thêm hiệu ứng fade */
+.banner-background::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-size: cover;
+    background-position: center;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.form_label {
+    min-width: 90px;
+    color: #333;
+    font-weight: 500;
+}
+
+/* Thêm style cho select box */
+select.form-control {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    background-size: 1em;
+}
+
+.promotions {
+    max-width: 700px;
+    /* Giảm max-width tổng thể */
+    margin: 20px auto;
+    padding: 0 15px;
+}
+
+.promotions h2 {
+    text-align: center;
+    color: white;
+    font-size: 38px;
+    margin-bottom: 30px;
+    font-weight: 600;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    min-height: 250px;
+    /* Giảm chiều cao */
+    width: 250px;
+    /* Giảm chiều rộng */
+    padding: 20px 20px;
+    /* Giảm padding */
+    background: rgba(255, 255, 255, 0.15);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+    border-radius: 15px;
+    /* Giảm border radius */
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    margin: 10px auto;
+}
+
+.promotion-icon {
+    width: 60px;
+    /* Giảm kích thước icon */
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    margin-bottom: 20px;
+}
+
+.promotion-icon i {
+    font-size: 30px;
+    /* Giảm kích thước icon */
+    color: rgba(255, 255, 255, 0.9);
+    animation: float 3s ease-in-out infinite;
+}
+
+.swiper-slide h3 {
+    font-size: 28px;
+    /* Giảm kích thước font */
+    color: #ffffff;
+    margin-bottom: 12px;
+    font-weight: 600;
+    text-align: center;
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.swiper-slide p {
+    font-size: 14px;
+    /* Giảm kích thước font */
+    color: #ffffff;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.promotion-date {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    font-size: 12px;
+    /* Giảm kích thước font */
+    color: rgba(255, 255, 255, 0.8);
+    margin-top: auto;
+    padding-top: 12px;
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    width: 100%;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .swiper-slide {
+        width: 220px;
+        /* Giảm thêm với màn hình nhỏ */
+        min-height: 220px;
+        padding: 20px 15px;
+    }
+
+    .promotion-icon {
+        width: 50px;
+        height: 50px;
+    }
+
+    .promotion-icon i {
+        font-size: 25px;
+    }
+
+    .swiper-slide h3 {
+        font-size: 16px;
+    }
+
+    .swiper-slide p {
+        font-size: 13px;
+    }
+}
+
+/* Thêm style cho nút điều hướng */
+.background-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(255, 255, 255, 0.3);
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    z-index: 100;
+}
+
+.background-nav:hover {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.background-nav.prev {
+    left: 20px;
+}
+
+.background-nav.next {
+    right: 20px;
+}
+
+.background-nav i {
+    color: white;
+    font-size: 20px;
+}
+
+.dropdown-menu-custom {
+    display: none;
+    /* Ẩn mặc định */
+    padding: 20px;
+    width: 100%;
+    border: 1px solid #e0e0e0;
+    background-color: #ffffff;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    top: 100%;
+    position: absolute;
+    z-index: 1050;
+}
+
+/* Hiện dropdown khi hover */
+.nav-item.dropdown:hover .dropdown-menu-custom {
+    display: block;
+}
+
+/* Kiểu chữ và khoảng cách cho dropdown */
+.dropdown-menu-custom h6 {
+    font-size: 16px;
+    color: #343a40;
+    margin-bottom: 10px;
+}
+
+.dropdown-menu-custom .dropdown-item {
+    color: #007bff;
+    padding: 5px 0;
+}
+
+.dropdown-menu-custom .dropdown-item:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+/* Photo banners in the homepage promotion carousel. */
+.promotions { padding-bottom: 32px; }
+.promotions h2 { font-size: clamp(23px, 4vw, 34px); margin-bottom: 18px; }
+.promotions .promotion-banner {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 280px;
+    padding: 30px;
+    overflow: hidden;
+    isolation: isolate;
+    background: #124e60;
+    backdrop-filter: none;
+    box-sizing: border-box;
+}
+.promotion-banner__image {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; z-index: -2;
+}
+.promotion-banner::after {
+    content: ''; position: absolute; inset: 0; z-index: -1;
+    background: linear-gradient(90deg, rgba(3, 39, 52, .92), rgba(3, 39, 52, .52) 65%, rgba(3, 39, 52, .1));
+}
+.promotion-banner--sunset::after {
+    background: linear-gradient(90deg, rgba(56, 24, 45, .92), rgba(56, 24, 45, .5) 65%, rgba(56, 24, 45, .1));
+}
+.promotion-banner__content { max-width: 78%; }
+.promotion-banner__label {
+    display: inline-block; color: #ffe3a2; font-size: 11px;
+    font-weight: 700; letter-spacing: 2px; margin-bottom: 16px;
+}
+.promotions .promotion-banner h3 {
+    text-align: left; font-size: clamp(24px, 4vw, 34px);
+    line-height: 1.15; margin-bottom: 12px; font-weight: 700;
+}
+.promotions .promotion-banner p { text-align: left; margin-bottom: 20px; }
+.promotion-banner__cta {
+    display: inline-flex; align-items: center; gap: 20px;
+    background: #ffe3a2; color: #183c46; padding: 10px 18px;
+    border-radius: 24px; font-size: 13px; font-weight: 700;
+}
+.promotion-banner__cta:hover { background: #fff1d0; color: #183c46; text-decoration: none; }
+.promotion-banner__cta:focus-visible { outline: 3px solid white; outline-offset: 4px; }
+.promotion-banner__stamp {
+    position: absolute; right: 22px; bottom: 26px; padding: 15px 10px;
+    border: 1px solid rgba(255,255,255,.7); border-radius: 50%;
+    color: white; font-size: 10px; letter-spacing: 2px; text-align: center;
+    transform: rotate(-12deg);
+}
+.promotions .swiper-pagination-bullet { background: white; opacity: .5; }
+.promotions .swiper-pagination-bullet-active { background: #ffe3a2; opacity: 1; }
+@media (max-width: 480px) {
+    .promotions .promotion-banner { padding: 24px 20px; min-height: 300px; }
+    .promotion-banner__content { max-width: 100%; }
+    .promotion-banner__stamp { display: none; }
+    .promotion-banner__label { font-size: 10px; letter-spacing: 1px; }
+}
