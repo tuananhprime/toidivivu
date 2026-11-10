@@ -23,7 +23,13 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-VERCEL_DEMO = config('VERCEL_DEMO', default=False, cast=bool)
+# Vercel inspects settings in a separate process before runtime env is applied.
+# A clean checkout without database credentials should use the read-only demo.
+_demo_default = (
+    not config('USE_SQLITE', default=False, cast=bool)
+    and not config('DB_NAME', default='')
+)
+VERCEL_DEMO = config('VERCEL_DEMO', default=_demo_default, cast=bool)
 SECRET_KEY = config('DJANGO_SECRET_KEY', default=get_random_secret_key())
 DEBUG = config('DJANGO_DEBUG', default=not VERCEL_DEMO, cast=bool)
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']

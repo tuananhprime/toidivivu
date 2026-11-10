@@ -4,5 +4,10 @@
   "buildCommand": "python build_vercel.py",
   "env": {
     "VERCEL_DEMO": "True"
+  },
+  "build": {
+    "env": {
+      "VERCEL_DEMO": "True"
+    }
   }
 }
