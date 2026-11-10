@@ -14,21 +14,6 @@ from capstone.utils import render_to_pdf, createticket
 from .constant import FEE
 from flight.utils import createWeekDays, addPlaces, addDomesticFlights, addInternationalFlights
 
-try:
-    if len(Week.objects.all()) == 0:
-        createWeekDays()
-
-    if len(Place.objects.all()) == 0:
-        addPlaces()
-
-    if len(Flight.objects.all()) == 0:
-        print("Do you want to add flights in the Database? (y/n)")
-        if input().lower() in ['y', 'yes']:
-            addDomesticFlights()
-            addInternationalFlights()
-except:
-    pass
-
 # Create your views here.
 
 def index(request):

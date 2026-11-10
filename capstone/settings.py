@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/3.1/ref/settings/
 
 from pathlib import Path
 from decouple import config
+from django.core.management.utils import get_random_secret_key
 import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -22,15 +23,19 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '=k3z-^1ov_hy5y%ebw(2e-npk@$#!(c8ix=+7so*hmw9m0c52*'
-
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
-
-ALLOWED_HOSTS = [
-    '127.0.0.1',
-    'flight-web-app.herokuapp.com',
-]
+VERCEL_DEMO = config('VERCEL_DEMO', default=False, cast=bool)
+SECRET_KEY = config('DJANGO_SECRET_KEY', default=get_random_secret_key())
+DEBUG = config('DJANGO_DEBUG', default=not VERCEL_DEMO, cast=bool)
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
+for host in (os.environ.get('VERCEL_URL'), os.environ.get('VERCEL_PROJECT_PRODUCTION_URL')):
+    if host:
+        ALLOWED_HOSTS.append(host)
+ALLOWED_HOSTS += config('DJANGO_ALLOWED_HOSTS', default='').split(',')
+if VERCEL_DEMO:
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_CONTENT_TYPE_NOSNIFF = True
+    SECURE_REFERRER_POLICY = 'same-origin'
 
 
 # Application definition
@@ -47,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'capstone.middleware.DemoReadOnlyMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -79,7 +85,15 @@ WSGI_APPLICATION = 'capstone.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.1/ref/settings/#databases
 
-if config('USE_SQLITE', default=False, cast=bool):
+if VERCEL_DEMO:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': 'file:' + str(BASE_DIR / 'db.vercel.sqlite3') + '?mode=ro',
+            'OPTIONS': {'uri': True},
+        }
+    }
+elif config('USE_SQLITE', default=False, cast=bool):
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
@@ -144,3 +158,4 @@ STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles')
 
 
 AUTH_USER_MODEL = 'flight.User'
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'

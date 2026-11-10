@@ -22,3 +22,13 @@ This project developed a website to provide information about flights along with
 
 ## Demo Video:  
 - https://drive.google.com/file/d/1g-27N6oNJbGLwiqBXTjpsu9saOTO4DKm/view?usp=sharing
+
+
+## Vercel UI demo
+
+Import this repository into Vercel using the Django framework preset.
+`vercel.json` enables `VERCEL_DEMO=True`; the build creates a fresh SQLite
+schema without copying local accounts or bookings. Vercel automatically
+collects and serves static assets. The deployed database is read-only and
+POST requests are disabled, so registration and booking are unavailable.
+For local development, keep `USE_SQLITE=True` in `.env`.
